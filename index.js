@@ -6,84 +6,49 @@ const precio4 = 2500;
 alert("Bienvenido a Negocio");
 let nombre = prompt("Ingrese su nombre");
 alert(`Bienvenido ${nombre}`);
-let choice = Number(prompt(`Elige una opción:\n1 - Producto 1 $${precio1}\n2 - Producto 2 $${precio2}\n3 - Producto 3 $${precio3}\n4 - Producto 4 $${precio4}\n5 - Salir`));
 
 let validacion = true;
 let otro = 0;
 
 while (validacion == true){
+    let choice = Number(prompt(`Elige una opción:\n1 - Producto 1 $${precio1}\n2 - Producto 2 $${precio2}\n3 - Producto 3 $${precio3}\n4 - Producto 4 $${precio4}\n5 - Salir`));
     switch(choice){
         case 1:
             alert(`Felicidades elegiste Producto 1!!`);
-            otro = Number(prompt("Desea agregar otro producto=\n1 - Si\n2 - No"))
-            if(otro === 1){
-                let choice = Number(prompt(`Elige una opción:\n1 - Producto 1 $${precio1}\n2 - Producto 2 $${precio2}\n3 - Producto 3 $${precio3}\n4 - Producto 4 $${precio4}\n5 - Salir`));
-                break;
-            }else if(otro == 2){
-                alert("Por el momento sólo aceptamos pago en efectivo");
-                let direccion = prompt("Ingrese su dirección así le llevamos el producto a su domicilio")
-                alert(`Gracias por elegir Negocio, pronto estará recibiendo su pedido en ${direccion}`)
-                validacion = false
-                break;
-            }else{
-                let choice = prompt(`Elige una opción:\n1 - Producto 1 $${precio1}\n2 - Producto 2 $${precio2}\n3 - Producto 3 $${precio3}\n4 - Producto 4 $${precio4}\n5 - Salir`);
-                break;
-            }
+            break;
         case 2:
-            alert(`Felicidades elegiste Producto 2!! Por el momento sólo aceptamos pago en efectivo`);
-            otro = Number(prompt("Desea agregar otro producto=\n1 - Si\n2 - No"))
-                if(otro == 1){
-                    let choice = Number(prompt(`Elige una opción:\n1 - Producto 1 $${precio1}\n2 - Producto 2 $${precio2}\n3 - Producto 3 $${precio3}\n4 - Producto 4 $${precio4}\n5 - Salir`));
-                    break;
-                }else if(otro == 2){
-                    let direccion = prompt("Ingrese su dirección así le llevamos el producto a su domicilio")
-                    alert(`Gracias por elegir Negocio, pronto estará recibiendo su pedido en ${direccion}`)
-                    validacion = false
-                    break;
-                }else{
-                    let choice = prompt(`Elige una opción:\n1 - Producto 1 $${precio1}\n2 - Producto 2 $${precio2}\n3 - Producto 3 $${precio3}\n4 - Producto 4 $${precio4}\n5 - Salir`);
-                    continue;
-                }
+            alert(`Felicidades elegiste Producto 2!!`);
+            break;
         case 3:
-            alert(`Felicidades elegiste Producto 3!! Por el momento sólo aceptamos pago en efectivo`);
-            otro = Number(prompt("Desea agregar otro producto=\n1 - Si\n2 - No"))
-                if(otro == 1){
-                    let choice = Number(prompt(`Elige una opción:\n1 - Producto 1 $${precio1}\n2 - Producto 2 $${precio2}\n3 - Producto 3 $${precio3}\n4 - Producto 4 $${precio4}\n5 - Salir`));
-                    break;
-                }else if(otro == 2){
-                    let direccion = prompt("Ingrese su dirección así le llevamos el producto a su domicilio")
-                    alert(`Gracias por elegir Negocio, pronto estará recibiendo su pedido en ${direccion}`)
-                    validacion = false
-                    break;
-                }else{
-                    let choice = prompt(`Elige una opción:\n1 - Producto 1 $${precio1}\n2 - Producto 2 $${precio2}\n3 - Producto 3 $${precio3}\n4 - Producto 4 $${precio4}\n5 - Salir`);
-                    continue;
-                }
+            alert(`Felicidades elegiste Producto 3!!`);
+            break;
         case 4:
-            alert(`Felicidades elegiste Producto 4!! Por el momento sólo aceptamos pago en efectivo`);
-            otro = Number(prompt("Desea agregar otro producto=\n1 - Si\n2 - No"))
-                if(otro == 1){
-                    let choice = Number(prompt(`Elige una opción:\n1 - Producto 1 $${precio1}\n2 - Producto 2 $${precio2}\n3 - Producto 3 $${precio3}\n4 - Producto 4 $${precio4}\n5 - Salir`));
-                    break;
-                }else if(otro == 2){
-                    let direccion = prompt("Ingrese su dirección así le llevamos el producto a su domicilio")
-                    alert(`Gracias por elegir Negocio, pronto estará recibiendo su pedido en ${direccion}`)
-                    validacion = false
-                    break;
-                }else{
-                    let choice = prompt(`Elige una opción:\n1 - Producto 1 $${precio1}\n2 - Producto 2 $${precio2}\n3 - Producto 3 $${precio3}\n4 - Producto 4 $${precio4}\n5 - Salir`);
-                    continue;
-                }
+            alert(`Felicidades elegiste Producto 4!!`);
+            break;
         case 5:
             alert(`Muchas gracias por visitar Negocio`);
             validacion = false
             break;
         default:
-            choice = prompt(`Elige una opción:\n1 - Producto 1 $${precio1}\n2 - Producto 2 $${precio2}\n3 - Producto 3 $${precio3}\n4 - Producto 4 $${precio4}\n5 - Salir`);
-            break
+            continue;
+    }
+    if (choice != 5){
+        otro = Number(prompt("Desea agregar otro producto?\n1 - Si\n2 - No"))
+            if(otro == 2){
+                alert("Por el momento sólo aceptamos pago en efectivo");
+                let direccion = prompt("Ingrese su dirección así le llevamos el producto a su domicilio")
+                alert(`Gracias por elegir Negocio, pronto estará recibiendo su pedido en ${direccion}`)
+                validacion = false
+                break;
+            }else if(otro == 1){
+                continue;
+            }else{
+                continue;
+            }
+    }else{
+        break;
     }
 }
-
 
 
 
