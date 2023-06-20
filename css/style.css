@@ -32,6 +32,7 @@ h1 {
     width: 250px;
 }
 
+
 .section1 div:hover {
     box-shadow: 10px 10px 10px -4px rgba(0, 0, 0, 0.61);
     -webkit-box-shadow: 10px 10px 10px -4px rgba(0, 0, 0, 0.61);

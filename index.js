@@ -19,7 +19,7 @@ let calcProd2 = 0;
 let calcProd3 = 0;
 let calcProd4 = 0;
 let total = 0;
-
+let bdClientes = [];
 const bdProductos = [
         {
         nombre:"Producto 1",    
@@ -47,11 +47,10 @@ const bdProductos = [
         }
 ]        
 
+const urlProductos = "https://6490c83a2f2c7ee6c2c77e0a.mockapi.io/productos";
+const urlClientes = "https://6490c83a2f2c7ee6c2c77e0a.mockapi.io/clientes";
+
 const form = document.getElementById("form");
-// const nombre = document.getElementById("nombre");
-// const apellido = document.getElementById("apellido");
-// const direccion = document.getElementById("direccion");
-// const telefono = document.getElementById("telefono");
 const inputsForm = document.querySelectorAll('.inputForm');
 const comprar = document.getElementById("btnCompra");
 const agregaProd1 = document.getElementById("btnAgregaProducto1");
@@ -187,6 +186,31 @@ function enviaDatos(){
         }
     })
 
+}
+
+function importaClientes(){
+    fetch(urlClientes).then((res) => res.json()).then((data) => 
+    bdClientes.push(...data)
+    )
+    console.log(bdClientes)
+}
+
+importaClientes();
+
+function verClientes(e){
+    e.preventDefault();
+    const nombre = inputsForm[0].value;
+    const apellido = inputsForm[1].value;
+    const direccion = inputsForm[2].value;
+    const telefono = inputsForm[3].value;
+    const datos = {
+        nombre,
+        apellido,
+        direccion,
+        telefono,
+    }
+    bdClientes.push(datos);
+    importaClientes()
 }
 
 
