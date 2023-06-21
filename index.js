@@ -48,7 +48,6 @@ const bdProductos = [
 ]        
 
 const urlProductos = "https://6490c83a2f2c7ee6c2c77e0a.mockapi.io/productos";
-const urlClientes = "https://6490c83a2f2c7ee6c2c77e0a.mockapi.io/clientes";
 
 const form = document.getElementById("form");
 const inputsForm = document.querySelectorAll('.inputForm');

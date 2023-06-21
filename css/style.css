@@ -29,17 +29,26 @@ h1 {
     border: 2px black solid;
     border-radius: 10px;
     padding: 10px;
-    width: 250px;
+    
 }
 
+.section1 div div{
+    display: flex;
+    flex-direction: row;
+}
 
-.section1 div:hover {
+.section1 div div div{
+    display: flex;
+    flex-direction: column;
+}
+
+/* .section1 div:hover {
     box-shadow: 10px 10px 10px -4px rgba(0, 0, 0, 0.61);
     -webkit-box-shadow: 10px 10px 10px -4px rgba(0, 0, 0, 0.61);
     -moz-box-shadow: 10px 10px 10px -4px rgba(0, 0, 0, 0.61);
     transform: scale(1.1) translateY(-10px);
     border-radius: 10px;
-}
+} */
 
 h3{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
