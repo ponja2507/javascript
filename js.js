@@ -17,45 +17,59 @@ addEventListener("DOMContentLoaded", () => {
     renderizarCarrito();
 });
 
-function renderizarProductos(bdProductos){
-    listaProd.innerHTML = "";
-    if (bdProductos.length > 0){
-        bdProductos.forEach((producto) => {
-        const {nombre, precio, descripcion, stock, id} = producto;
-        listaProd.innerHTML += `
+function renderizarProductos(bdProductos) {
+	listaProd.innerHTML = "";
+	if (bdProductos.length > 0) {
+		bdProductos.forEach((producto) => {
+			const { nombre, precio, descripcion, stock, id } = producto;
+			listaProd.innerHTML += `
             <div class="prod">
             <h3>${nombre}</h3>
             <h6>${precio}</h6>
             <p>${descripcion}</p>
-            <button class = "btnCompra" id=${id}>Comprar</button>
+            <button class = "btnCompra-${id}" id=${id}>Comprar</button>
             </div>
             `;
-        const btnCompra = document.querySelectorAll(".btnCompra")
-    });
-}else{
-    listaProd.innerHTML = `<p>No hay prod</p>`
+		});
+		bdProductos.forEach((producto) => {
+			const btnCompra = document.querySelector(`.btnCompra-${producto.id}`);
+			btnCompra.addEventListener("click", (e) => {
+            const producto = bdProductos.find((producto => {
+                return producto.id == e.target.id;
+            }))
+            const prueba = carrito.indexOf(producto)
+            console.log(prueba)
+            console.log(producto)
+            console.log(carrito)
+            if(prueba > 0){
+                carrito.cantidad = (carrito.cantidad + 1);
+            }else{
+                const {nombre, precio, cantidad} = producto;
+                carrito.nombre = nombre;
+                carrito.precio = precio;
+                carrito.cantidad = 1;
+                console.log("salida")
+            }
+            // renderizarCarrito();
+        });
+		});
+	} else {
+		listaProd.innerHTML = `<p>No hay prod</p>`;
+	}
 }
-}
+
+// addEventListener("click", (e) => {
+
 
 function importaProductos(){
     fetch(urlProductos)
     .then((res) => res.json())
     .then((data) => {
-        bdProductos.push(...data),
+        bdProductos.push(...data);
         renderizarProductos(bdProductos);
     })
 };
 
-addEventListener("click", (e) => {
-    const producto = bdProductos.find((producto => {
-        return producto.id == e.target.id;
-    }))
-    const {nombre, precio, cantidad} = producto;
-    carrito.nombre = nombre;
-    carrito.precio = precio;
-    carrito.cantidad += cantidad;
-    renderizarCarrito();
-});
 // btnCompra.addEventListener('click', (e) => {
     //     e.preventDefault();
     //     seleccion == btnCompra.id;
@@ -110,6 +124,3 @@ function renderizarCarrito(){
         `;
     })
 };
-
-// renderizarCarrito();
-console.log(carrito)

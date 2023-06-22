@@ -1,216 +1,216 @@
-let validar = false;
-let producto1 = 0;
-let producto2 = 0;
-let producto3 = 0;
-let producto4 = 0;
-let carrito = [{
-    cantProducto1: 0,
-    cantProducto2: 0,
-    cantProducto3: 0,
-    cantProducto4: 0,
-    precioProducto1: 0,
-    precioProducto2: 0,
-    precioProducto3: 0,
-    precioProducto4: 0,
-}];
-let inputs = [];
-let calcProd1 = 0;
-let calcProd2 = 0;
-let calcProd3 = 0;
-let calcProd4 = 0;
-let total = 0;
-let bdClientes = [];
-const bdProductos = [
-        {
-        nombre:"Producto 1",    
-        precio: 1000,
-        descripcion: "Descripción de Producto 1",
-        stock: true
-        },
-        {
-        nombre:"Producto 2",    
-        precio: 1500,
-        descripcion: "Descripción de Producto 2",
-        stock: true
-        },
-        {
-        nombre:"Producto 3",    
-        precio: 2000,
-        descripcion: "Descripción de Producto 3",
-        stock: true
-        },
-        {
-        nombre:"Producto 4",    
-        precio: 2500,
-        descripcion: "Descripción de Producto 4",
-        stock: true
-        }
-]        
+// let validar = false;
+// let producto1 = 0;
+// let producto2 = 0;
+// let producto3 = 0;
+// let producto4 = 0;
+// // let carrito = [{
+// //     cantProducto1: 0,
+// //     cantProducto2: 0,
+// //     cantProducto3: 0,
+// //     cantProducto4: 0,
+// //     precioProducto1: 0,
+// //     precioProducto2: 0,
+// //     precioProducto3: 0,
+// //     precioProducto4: 0,
+// // }];
+// let inputs = [];
+// let calcProd1 = 0;
+// let calcProd2 = 0;
+// let calcProd3 = 0;
+// let calcProd4 = 0;
+// let total = 0;
+// let bdClientes = [];
+// const bdProductos = [
+//         {
+//         nombre:"Producto 1",    
+//         precio: 1000,
+//         descripcion: "Descripción de Producto 1",
+//         stock: true
+//         },
+//         {
+//         nombre:"Producto 2",    
+//         precio: 1500,
+//         descripcion: "Descripción de Producto 2",
+//         stock: true
+//         },
+//         {
+//         nombre:"Producto 3",    
+//         precio: 2000,
+//         descripcion: "Descripción de Producto 3",
+//         stock: true
+//         },
+//         {
+//         nombre:"Producto 4",    
+//         precio: 2500,
+//         descripcion: "Descripción de Producto 4",
+//         stock: true
+//         }
+// ]        
 
-const urlProductos = "https://6490c83a2f2c7ee6c2c77e0a.mockapi.io/productos";
+// const urlProductos = "https://6490c83a2f2c7ee6c2c77e0a.mockapi.io/productos";
 
-const form = document.getElementById("form");
-const inputsForm = document.querySelectorAll('.inputForm');
-const comprar = document.getElementById("btnCompra");
-const agregaProd1 = document.getElementById("btnAgregaProducto1");
-const agregaProd2 = document.getElementById("btnAgregaProducto2");
-const agregaProd3 = document.getElementById("btnAgregaProducto3");
-const agregaProd4 = document.getElementById("btnAgregaProducto4");
-const muestraCarrito = document.getElementById('muestraCarrito');
-
-
+// const form = document.getElementById("form");
+// const inputsForm = document.querySelectorAll('.inputForm');
+// const comprar = document.getElementById("btnCompra");
+// const agregaProd1 = document.getElementById("btnAgregaProducto1");
+// const agregaProd2 = document.getElementById("btnAgregaProducto2");
+// const agregaProd3 = document.getElementById("btnAgregaProducto3");
+// const agregaProd4 = document.getElementById("btnAgregaProducto4");
+// const muestraCarrito = document.getElementById('muestraCarrito');
 
 
-agregaProd1.addEventListener('click', (e) => {
-    e.preventDefault();
-    producto1 += 1;
-    carrito[0] = producto1
-    carrito[4] = bdProductos[0].precio;
-    localStorage.setItem('Producto 1', JSON.stringify(carrito[0]))
-    localStorage.setItem('Precio 1', JSON.stringify(carrito[4]))
-    renderizarCarrito();
-})
-
-agregaProd2.addEventListener('click', (e) => {
-    e.preventDefault();
-    producto2 += 1;
-    carrito[1] = producto2
-    carrito[5] = bdProductos[1].precio;
-    localStorage.setItem('Producto 2', JSON.stringify(carrito[1]))
-    localStorage.setItem('Precio 2', JSON.stringify(carrito[5]))
-    renderizarCarrito();
-})
-
-agregaProd3.addEventListener('click', (e) => {
-    e.preventDefault();
-    producto3 += 1;
-    carrito[2] = producto3
-    carrito[6] = bdProductos[2].precio;
-    localStorage.setItem('Producto 3', JSON.stringify(carrito[2]))
-    localStorage.setItem('Precio 3', JSON.stringify(carrito[6]))
-    renderizarCarrito();
-})
-
-agregaProd4.addEventListener('click', (e) => {
-    e.preventDefault();
-    producto4 += 1;
-    carrito[3] = producto4
-    carrito[7] = bdProductos[3].precio;
-    localStorage.setItem('Producto 4', JSON.stringify(carrito[3]))
-    localStorage.setItem('Precio 4', JSON.stringify(carrito[7]))
-    renderizarCarrito();
-})
 
 
-function renderizarCarrito(arrayCarrito){
-    muestraCarrito.innerHTML = "";
-    arrayCarrito = Object.values(carrito);
-    muestraCarrito.innerHTML += `
-    <p>Producto 1: ${JSON.parse(localStorage.getItem('Producto 1'))} Costo: $ ${calculoProducto1()}</p>
-    <p>Producto 2: ${JSON.parse(localStorage.getItem('Producto 2'))} Costo: $ ${calculoProducto2()}</p>
-    <p>Producto 3: ${JSON.parse(localStorage.getItem('Producto 3'))} Costo: $ ${calculoProducto3()}</p>
-    <p>Producto 4: ${JSON.parse(localStorage.getItem('Producto 4'))} Costo: $ ${calculoProducto4()}</p>
-    <p>TOTAL: $ ${calculoTotal()}</p>
-    `;
-};
+// agregaProd1.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     producto1 += 1;
+//     carrito[0] = producto1
+//     carrito[4] = bdProductos[0].precio;
+//     localStorage.setItem('Producto 1', JSON.stringify(carrito[0]))
+//     localStorage.setItem('Precio 1', JSON.stringify(carrito[4]))
+//     renderizarCarrito();
+// })
 
-function calculoProducto1(){
-    calcProd1 = JSON.parse(localStorage.getItem('Producto 1')) * JSON.parse(localStorage.getItem('Precio 1'))
-    return calcProd1;
-}
+// agregaProd2.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     producto2 += 1;
+//     carrito[1] = producto2
+//     carrito[5] = bdProductos[1].precio;
+//     localStorage.setItem('Producto 2', JSON.stringify(carrito[1]))
+//     localStorage.setItem('Precio 2', JSON.stringify(carrito[5]))
+//     renderizarCarrito();
+// })
 
-function calculoProducto2(){
-    calcProd2 = JSON.parse(localStorage.getItem('Producto 2')) * JSON.parse(localStorage.getItem('Precio 2'));
-    return calcProd2;
-}
+// agregaProd3.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     producto3 += 1;
+//     carrito[2] = producto3
+//     carrito[6] = bdProductos[2].precio;
+//     localStorage.setItem('Producto 3', JSON.stringify(carrito[2]))
+//     localStorage.setItem('Precio 3', JSON.stringify(carrito[6]))
+//     renderizarCarrito();
+// })
 
-function calculoProducto3(){
-    calcProd3 = JSON.parse(localStorage.getItem('Producto 3')) * JSON.parse(localStorage.getItem('Precio 3'));
-    return calcProd3
-}
-
-function calculoProducto4(){
-    calcProd4 = JSON.parse(localStorage.getItem('Producto 4')) * JSON.parse(localStorage.getItem('Precio 4'));
-    return calcProd4
-}
-
-function calculoTotal(){
-    total = JSON.parse(localStorage.getItem('Producto 1')) * JSON.parse(localStorage.getItem('Precio 1')) + JSON.parse(localStorage.getItem('Producto 2')) * JSON.parse(localStorage.getItem('Precio 2')) + JSON.parse(localStorage.getItem('Producto 3')) * JSON.parse(localStorage.getItem('Precio 3')) + JSON.parse(localStorage.getItem('Producto 4')) * JSON.parse(localStorage.getItem('Precio 4'))
-    return total;
-}
-
-inputsForm.forEach(input => {
-    input.addEventListener('input', () => {
-        if (inputsForm[0].values && inputsForm[0].values && inputsForm[1].values && inputsForm[2].values && inputsForm[3].values){
-            validar = true;
-        }else{
-            validar = false;
-        }
-    })
-})
+// agregaProd4.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     producto4 += 1;
+//     carrito[3] = producto4
+//     carrito[7] = bdProductos[3].precio;
+//     localStorage.setItem('Producto 4', JSON.stringify(carrito[3]))
+//     localStorage.setItem('Precio 4', JSON.stringify(carrito[7]))
+//     renderizarCarrito();
+// })
 
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    enviaDatos();
-    // if (validar){
-    // }else{
-    //     alert("faltan datos");
-    // }
-})
+// function renderizarCarrito(arrayCarrito){
+//     muestraCarrito.innerHTML = "";
+//     arrayCarrito = Object.values(carrito);
+//     muestraCarrito.innerHTML += `
+//     <p>Producto 1: ${JSON.parse(localStorage.getItem('Producto 1'))} Costo: $ ${calculoProducto1()}</p>
+//     <p>Producto 2: ${JSON.parse(localStorage.getItem('Producto 2'))} Costo: $ ${calculoProducto2()}</p>
+//     <p>Producto 3: ${JSON.parse(localStorage.getItem('Producto 3'))} Costo: $ ${calculoProducto3()}</p>
+//     <p>Producto 4: ${JSON.parse(localStorage.getItem('Producto 4'))} Costo: $ ${calculoProducto4()}</p>
+//     <p>TOTAL: $ ${calculoTotal()}</p>
+//     `;
+// };
 
-function enviaDatos(){
-    const nombre = inputsForm[0].value;
-    const apellido = inputsForm[1].value;
-    const direccion = inputsForm[2].value;
-    const telefono = inputsForm[3].value;
-    const datos = {
-        nombre,
-        apellido,
-        direccion,
-        telefono,
-    }
+// function calculoProducto1(){
+//     calcProd1 = JSON.parse(localStorage.getItem('Producto 1')) * JSON.parse(localStorage.getItem('Precio 1'))
+//     return calcProd1;
+// }
+
+// function calculoProducto2(){
+//     calcProd2 = JSON.parse(localStorage.getItem('Producto 2')) * JSON.parse(localStorage.getItem('Precio 2'));
+//     return calcProd2;
+// }
+
+// function calculoProducto3(){
+//     calcProd3 = JSON.parse(localStorage.getItem('Producto 3')) * JSON.parse(localStorage.getItem('Precio 3'));
+//     return calcProd3
+// }
+
+// function calculoProducto4(){
+//     calcProd4 = JSON.parse(localStorage.getItem('Producto 4')) * JSON.parse(localStorage.getItem('Precio 4'));
+//     return calcProd4
+// }
+
+// function calculoTotal(){
+//     total = JSON.parse(localStorage.getItem('Producto 1')) * JSON.parse(localStorage.getItem('Precio 1')) + JSON.parse(localStorage.getItem('Producto 2')) * JSON.parse(localStorage.getItem('Precio 2')) + JSON.parse(localStorage.getItem('Producto 3')) * JSON.parse(localStorage.getItem('Precio 3')) + JSON.parse(localStorage.getItem('Producto 4')) * JSON.parse(localStorage.getItem('Precio 4'))
+//     return total;
+// }
+
+// inputsForm.forEach(input => {
+//     input.addEventListener('input', () => {
+//         if (inputsForm[0].values && inputsForm[0].values && inputsForm[1].values && inputsForm[2].values && inputsForm[3].values){
+//             validar = true;
+//         }else{
+//             validar = false;
+//         }
+//     })
+// })
+
+
+// form.addEventListener('submit', (e) => {
+//     e.preventDefault();
+//     enviaDatos();
+//     // if (validar){
+//     // }else{
+//     //     alert("faltan datos");
+//     // }
+// })
+
+// function enviaDatos(){
+//     const nombre = inputsForm[0].value;
+//     const apellido = inputsForm[1].value;
+//     const direccion = inputsForm[2].value;
+//     const telefono = inputsForm[3].value;
+//     const datos = {
+//         nombre,
+//         apellido,
+//         direccion,
+//         telefono,
+//     }
     
-    inputs.push(datos);
-    localStorage.setItem('inputs', JSON.stringify(inputs))
+//     inputs.push(datos);
+//     localStorage.setItem('inputs', JSON.stringify(inputs))
     
 
-    Swal.fire({
-        title: (`Muchas gracias ${nombre}, tu pedido será enviado a ${direccion}, el costo total será $ ${calculoTotal()}`),
-        showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-        }
-    })
+//     Swal.fire({
+//         title: (`Muchas gracias ${nombre}, tu pedido será enviado a ${direccion}, el costo total será $ ${calculoTotal()}`),
+//         showClass: {
+//         popup: 'animate__animated animate__fadeInDown'
+//         },
+//         hideClass: {
+//         popup: 'animate__animated animate__fadeOutUp'
+//         }
+//     })
 
-}
+// }
 
-function importaClientes(){
-    fetch(urlClientes).then((res) => res.json()).then((data) => 
-    bdClientes.push(...data)
-    )
-    console.log(bdClientes)
-}
+// function importaClientes(){
+//     fetch(urlClientes).then((res) => res.json()).then((data) => 
+//     bdClientes.push(...data)
+//     )
+//     console.log(bdClientes)
+// }
 
-importaClientes();
+// importaClientes();
 
-function verClientes(e){
-    e.preventDefault();
-    const nombre = inputsForm[0].value;
-    const apellido = inputsForm[1].value;
-    const direccion = inputsForm[2].value;
-    const telefono = inputsForm[3].value;
-    const datos = {
-        nombre,
-        apellido,
-        direccion,
-        telefono,
-    }
-    bdClientes.push(datos);
-    importaClientes()
-}
+// function verClientes(e){
+//     e.preventDefault();
+//     const nombre = inputsForm[0].value;
+//     const apellido = inputsForm[1].value;
+//     const direccion = inputsForm[2].value;
+//     const telefono = inputsForm[3].value;
+//     const datos = {
+//         nombre,
+//         apellido,
+//         direccion,
+//         telefono,
+//     }
+//     bdClientes.push(datos);
+//     importaClientes()
+// }
 
 
 // renderizarCarrito();
