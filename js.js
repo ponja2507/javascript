@@ -1,6 +1,6 @@
 let validar = false;
 let inputs = [];
-let total = 0;
+let total = [];
 const bdProductos = [];
 const carrito = [];
 
@@ -34,24 +34,15 @@ function renderizarProductos(bdProductos) {
 		bdProductos.forEach((producto) => {
 			const btnCompra = document.querySelector(`.btnCompra-${producto.id}`);
 			btnCompra.addEventListener("click", (e) => {
-            const producto = bdProductos.find((producto => {
-                return producto.id == e.target.id;
-            }))
-            const prueba = carrito.includes(producto)
-            console.log(prueba)
-            if(prueba){
-                carrito.cantidad = (carrito.cantidad + 1);
+                const productoCarrito = carrito.find((prod) => {
+                    return prod.id == producto.id;
+            });
+            if(productoCarrito){
+                productoCarrito.cantidad ++;
             }else{
-                const {nombre, precio, descripcion, cantidad} = producto;
-                    carrito.nombre = nombre,
-                    carrito.precio = precio,
-                    carrito.descripcion = descripcion
-                    carrito.cantidad = cantidad
-                console.log("salida")
-                console.log(carrito)
-                console.log(carrito.cantidad)
+                carrito.push({...producto, cantidad:1})
             }
-            // renderizarCarrito();
+            renderizarCarrito();
         });
 		});
 	} else {
@@ -59,7 +50,6 @@ function renderizarProductos(bdProductos) {
 	}
 }
 
-// addEventListener("click", (e) => {
 
 
 function importaProductos(){
@@ -71,57 +61,59 @@ function importaProductos(){
     })
 };
 
-// btnCompra.addEventListener('click', (e) => {
-    //     e.preventDefault();
-    //     seleccion == btnCompra.id;
-//     console.log(seleccion)
-    // carrito[0] = producto1
-    // carrito[4] = bdProductos[0].precio;
-    // localStorage.setItem('Producto 1', JSON.stringify(carrito[0]))
-    // localStorage.setItem('Precio 1', JSON.stringify(carrito[4]))
-    // renderizarCarrito();
-// })
-
-
-// function comprar (){
-//     querySelector.forEach((btn) => {
-//         btn.addEventListener("click", (e) => {
-//             const producto = producto.find((producto) => {
-//                 return producto.id == e.target.id;
-//             });
-//             const {nombre, precio, cantidad} = producto;
-//             producto.nombre = nombre;
-//             producto.precio = precio;
-//             producto.cant = cantidad;
-//             carrito.push(producto);
-//             renderizarCarrito();
-//             })
-//         })
-//     };
-
-
-// async function carrito (producto){
-//     const resp = await fetch(urlProductos, {
-//         method: "POST",
-//         body: JSON.stringify(producto),
-//         headers: {
-//             "Content-Type": "application/json",
-//         }
-//     })
-//     const data = await resp.json();
-//     carrito.push(data);
-//     renderizarCarrito(carrito);
-// }
 
 function renderizarCarrito(){
     muestraCarrito.innerHTML = "";
     carrito.forEach((producto) => {
         const {nombre, precio, descripcion, cantidad} = producto;
         muestraCarrito.innerHTML += `
-            <h3>${nombre}</h3>
-            <h6>${precio}</h6>
-            <p>${cantidad}</p>
-            <p>${total}</p>)
+            <h3>Producto: ${nombre}</h3>
+            <h6>Precio: $ ${precio}</h6>
+            <p>Cantidad: ${cantidad}</p>
+            <p>Total: $ ${precio*cantidad}</p>
         `;
     })
 };
+
+
+
+inputsForm.forEach(input => {
+        input.addEventListener('input', () => {
+            if (inputsForm[0].values && inputsForm[0].values && inputsForm[1].values && inputsForm[2].values && inputsForm[3].values){
+                validar = true;
+            }else{
+                validar = false;
+            }
+        })
+    })
+
+function enviaDatos(){
+        const nombre = inputsForm[0].value;
+        const apellido = inputsForm[1].value;
+        const direccion = inputsForm[2].value;
+        const telefono = inputsForm[3].value;
+        const datos = {
+            nombre,
+            apellido,
+            direccion,
+            telefono,
+        }
+        
+    
+        Swal.fire({
+            title: (`Muchas gracias ${nombre}, tu pedido será enviado a ${direccion}`),
+            showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+            }
+        })
+    
+    }
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    enviaDatos();
+
+})
