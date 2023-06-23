@@ -21,7 +21,7 @@ function renderizarProductos(bdProductos) {
 	listaProd.innerHTML = "";
 	if (bdProductos.length > 0) {
 		bdProductos.forEach((producto) => {
-			const { nombre, precio, descripcion, stock, id } = producto;
+			const { nombre, precio, descripcion, cantidad, id } = producto;
 			listaProd.innerHTML += `
             <div class="prod">
             <h3>${nombre}</h3>
@@ -37,18 +37,19 @@ function renderizarProductos(bdProductos) {
             const producto = bdProductos.find((producto => {
                 return producto.id == e.target.id;
             }))
-            const prueba = carrito.indexOf(producto)
+            const prueba = carrito.includes(producto)
             console.log(prueba)
-            console.log(producto)
-            console.log(carrito)
-            if(prueba > 0){
+            if(prueba){
                 carrito.cantidad = (carrito.cantidad + 1);
             }else{
-                const {nombre, precio, cantidad} = producto;
-                carrito.nombre = nombre;
-                carrito.precio = precio;
-                carrito.cantidad = 1;
+                const {nombre, precio, descripcion, cantidad} = producto;
+                    carrito.nombre = nombre,
+                    carrito.precio = precio,
+                    carrito.descripcion = descripcion
+                    carrito.cantidad = cantidad
                 console.log("salida")
+                console.log(carrito)
+                console.log(carrito.cantidad)
             }
             // renderizarCarrito();
         });
@@ -115,7 +116,7 @@ function importaProductos(){
 function renderizarCarrito(){
     muestraCarrito.innerHTML = "";
     carrito.forEach((producto) => {
-        const {nombre, precio, cantidad} = producto;
+        const {nombre, precio, descripcion, cantidad} = producto;
         muestraCarrito.innerHTML += `
             <h3>${nombre}</h3>
             <h6>${precio}</h6>
