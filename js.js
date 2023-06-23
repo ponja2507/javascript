@@ -1,4 +1,3 @@
-let validar = false;
 let inputs = [];
 let total = [];
 const bdProductos = [];
@@ -75,17 +74,6 @@ function renderizarCarrito(){
     })
 };
 
-
-
-inputsForm.forEach(input => {
-        input.addEventListener('input', () => {
-            if (inputsForm[0].values && inputsForm[0].values && inputsForm[1].values && inputsForm[2].values && inputsForm[3].values){
-                validar = true;
-            }else{
-                validar = false;
-            }
-        })
-    })
 
 function enviaDatos(){
         const nombre = inputsForm[0].value;
