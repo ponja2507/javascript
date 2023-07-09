@@ -5,7 +5,7 @@ const carrito = [];
 
 const urlProductos = "https://6490c83a2f2c7ee6c2c77e0a.mockapi.io/productos";
 
-const form = dosfasecument.getElementById("form");
+const form = document.getElementById("form");
 const inputsForm = document.querySelectorAll('.inputForm');
 const comprar = document.getElementById("btnCompra");
 const muestraCarrito = document.getElementById('muestraCarrito');
